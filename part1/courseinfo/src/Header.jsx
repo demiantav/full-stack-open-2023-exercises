@@ -1,5 +1,7 @@
 const Header = (props) => {
 
+  console.log(props);
+
     return (
         <>
           <p>{props.course}</p>
