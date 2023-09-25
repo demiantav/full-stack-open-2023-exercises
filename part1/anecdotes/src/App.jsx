@@ -19,12 +19,15 @@ const App = () => {
 
   
 
-  console.log(anecdotes);
+  
 
   const [selected, setSelected] = useState(0);
   const [points, setPoints] = useState(new Array(8).fill(0));
+ 
 
   const randomAnecdote = () => {
+
+    
 
     const random = (Math.floor(Math.random() * anecdotes.length));
     setSelected(random);
@@ -37,12 +40,14 @@ const App = () => {
     copy[anecdote] ++
     setPoints(copy);
     
+    
   }
+
+  
 
   const findMax = () => {
 
     let max = points[0],
-        min = points[0],
         maxIndex = 0;
 
     for(let i=0 ; i<points.length; i++){
