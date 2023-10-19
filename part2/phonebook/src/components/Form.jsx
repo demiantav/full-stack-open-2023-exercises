@@ -7,6 +7,7 @@ const Form = ({addContact, updateInputs}) => {
           <h2>Add new contact</h2>
           name: <input type ="text" name='name' onChange={updateInputs}/>
           <br />
+          <br />
           number: <input type= "number" name='number' onChange={updateInputs} />
           
         </div>

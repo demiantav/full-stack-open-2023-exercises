@@ -1,14 +1,15 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import "./style.css"
 import Filter from './components/Filter'
 import Form from './components/Form'
 import Numbers from './components/Numbers'
+import axios from 'axios'
+import phoneService from './services/requests'
 
-const App = ({contacts}) => {
 
+const App = () => {
 
-
-  const [persons, setPersons] = useState(contacts) 
+  const [persons, setPersons] = useState([])
 
   const [newContact, setNewContact] = useState({
     
@@ -17,22 +18,45 @@ const App = ({contacts}) => {
 
   })
 
+useEffect(() => {
+
+    const getAll = async () => {
+
+      try {
+  
+        const data = await phoneService.get();
+  
+        setPersons(data);
+        
+      } catch (error) {
+  
+        alert(error);
+        
+      }
+    }
+
+    getAll();
 
 
+  },[]);
 
-
-
-
-
+  
+  
+  
+  
   const updateInputs = (e) => {
 
-    setNewContact({
+    const person = {
 
       ...newContact,
       [e.target.name]: e.target.value,
-          
-    
-    })
+
+    }
+
+    setNewContact(person)
+
+    console.log(e)
+    console.log(person)
 
     
   }
