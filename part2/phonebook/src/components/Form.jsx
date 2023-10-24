@@ -1,14 +1,14 @@
-const Form = ({addContact, updateInputs}) => {
+const Form = ({addContact, updateInputs, newContact}) => {
 
     return (
 
         <form onSubmit={addContact}>
         <div>
           <h2>Add new contact</h2>
-          name: <input type ="text" name='name' onChange={updateInputs}/>
+          name: <input value={newContact.name} type ="text" name='name' onChange={updateInputs}/>
           <br />
           <br />
-          number: <input type= "number" name='number' onChange={updateInputs} />
+          number: <input value={newContact.number}  type= "number" name='number' onChange={updateInputs} />
           
         </div>
 

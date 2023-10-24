@@ -8,6 +8,7 @@ import phoneService from './services/requests'
 
 
 const App = () => {
+  console.log("se reenderizo")
 
   const [persons, setPersons] = useState([])
 
@@ -62,7 +63,7 @@ useEffect(() => {
   }
 
 
-  const addContact = (e) => {
+  const addContact = async (e) => {
     
     e.preventDefault();
 
@@ -74,17 +75,31 @@ useEffect(() => {
 
       const newPerson= { name: newContact.name, number: newContact.number }
 
-      setPersons(persons.concat(newPerson));
-      setNewContact({
-        name:``,
-        number:``
-      });
+      const per = await phoneService.post(newPerson);
 
+      const blank = {
+        name:"",
+        number:""
+      }
+
+      setNewContact(blank)
+
+      console.log(newContact)
+
+      setPersons(persons.concat(newPerson));
+
+      
       
     } else {
 
         alert(`${newContact.name} is already added to phonebook`)
-        return
+        const blank = {
+          name:"",
+          number:""
+        }
+  
+        setNewContact(blank)
+        
 
     }
   }
@@ -114,7 +129,7 @@ useEffect(() => {
 
       <Filter filterContacts={filterContacts} />
 
-      <Form addContact={addContact} updateInputs={updateInputs}/>
+      <Form newContact={newContact} addContact={addContact} updateInputs={updateInputs}/>
 
       <Numbers persons={persons} />
 
