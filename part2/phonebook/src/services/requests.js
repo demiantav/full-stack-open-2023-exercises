@@ -25,13 +25,37 @@ const post = async (contact) => {
 
 const supr = async (id) => {
 
-    const request = await axios.delete(`${URL}/${id}`);
+    try {
 
-    console.log(request.data);
+        await axios.delete(`${URL}/${id}`);
+        
+    } catch (error) {
 
-    return request.data;
+        console.log(error);
+        
+    }
+
+    
 
 
 }
 
-export default { get, post, supr}
+const update = async (id,object) => {
+
+    try {
+
+        const res = await axios.put(`${URL}/${id}`,object);
+        return res.data;
+        
+    } catch (error) {
+
+        console.log(error);
+        
+    }
+
+    
+
+
+}
+
+export default { get, post, supr, update}

@@ -1,18 +1,9 @@
-import phoneService from '../services/requests.js'
-
-function Button ({id}){
-
-    const wantToDelete =  async (id) => {
-       
-         const res = await phoneService.supr(id)
-
-        console.log(id)
-        
 
 
-    }
+function Button ({id,del,name}){
 
-    return <><button onClick={() => wantToDelete(id)}>Delete</button></>
+
+    return <><button onClick={() => del(id,name)} >Delete</button></>
 
 }
 

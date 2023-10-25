@@ -8,6 +8,7 @@ import phoneService from './services/requests'
 
 
 const App = () => {
+
   console.log("se reenderizo")
 
   const [persons, setPersons] = useState([])
@@ -42,9 +43,6 @@ useEffect(() => {
   },[]);
 
   
-  
-  
-  
   const updateInputs = (e) => {
 
     const person = {
@@ -72,36 +70,47 @@ useEffect(() => {
     const result = persons.find(item => item.name.toLowerCase() === newContact.name.toLowerCase());
 
     if(result===undefined){
+      
+      const per = await phoneService.post(newContact);
 
-      const newPerson= { name: newContact.name, number: newContact.number }
+      setPersons(persons.concat(per));
+    
+    } else {
+        
+        const confirm = window.confirm(`${newContact.name} is already added to phonebook, do you want to replace?`)
 
-      const per = await phoneService.post(newPerson);
+        if(confirm){
+
+          const updated = await phoneService.update(result.id, newContact);
+
+          setPersons(persons.map(person => person.id != updated.id ? person : updated)); 
+
+        }
+      }
 
       const blank = {
         name:"",
         number:""
       }
 
-      setNewContact(blank)
+    setNewContact(blank)
+  }
 
-      console.log(newContact)
+  const deleteContact = async (id,name) => {
 
-      setPersons(persons.concat(newPerson));
+    const confirm = window.confirm(`Do you want to delete ${name}`);
 
-      
-      
-    } else {
+    if(confirm){
 
-        alert(`${newContact.name} is already added to phonebook`)
-        const blank = {
-          name:"",
-          number:""
-        }
-  
-        setNewContact(blank)
-        
+      await phoneService.supr(id);
 
-    }
+      setPersons(persons.filter(person => person.id !== id))
+
+
+    } 
+
+   
+
   }
 
   const filterContacts = (e) => {
@@ -117,9 +126,7 @@ useEffect(() => {
           el.classList.add("contact");
 
     })
-
-
-
+  
   }
 
 
@@ -131,7 +138,7 @@ useEffect(() => {
 
       <Form newContact={newContact} addContact={addContact} updateInputs={updateInputs}/>
 
-      <Numbers persons={persons} />
+      <Numbers persons={persons} del={deleteContact}/>
 
     </div>
   )
