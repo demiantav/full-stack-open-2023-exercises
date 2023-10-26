@@ -17,13 +17,8 @@
     },
     {
       "name": "rafael",
-      "number": "234234",
+      "number": "4545",
       "id": 9
-    },
-    {
-      "name": "señor",
-      "number": "66666",
-      "id": 10
     },
     {
       "name": "josefina",
@@ -46,29 +41,9 @@
       "id": 14
     },
     {
-      "name": "menem",
-      "number": "2343",
-      "id": 15
-    },
-    {
       "name": "julio",
       "number": "21",
       "id": 16
-    },
-    {
-      "name": "kairo",
-      "number": "98",
-      "id": 17
-    },
-    {
-      "name": "jairo",
-      "number": "321",
-      "id": 18
-    },
-    {
-      "name": "almendras",
-      "number": "45",
-      "id": 19
     }
   ]
 }

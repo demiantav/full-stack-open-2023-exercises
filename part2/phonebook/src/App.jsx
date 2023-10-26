@@ -5,6 +5,7 @@ import Form from './components/Form'
 import Numbers from './components/Numbers'
 import axios from 'axios'
 import phoneService from './services/requests'
+import Notification from './components/Notification'
 
 
 const App = () => {
@@ -12,6 +13,8 @@ const App = () => {
   console.log("se reenderizo")
 
   const [persons, setPersons] = useState([])
+
+  const [message, setMessageSuccess] = useState(null)
 
   const [newContact, setNewContact] = useState({
     
@@ -74,6 +77,12 @@ useEffect(() => {
       const per = await phoneService.post(newContact);
 
       setPersons(persons.concat(per));
+
+      setMessageSuccess(` Added ${newContact.name}`)
+
+      setTimeout(() => {
+        setMessageSuccess(null)
+      }, 5000)
     
     } else {
         
@@ -81,9 +90,33 @@ useEffect(() => {
 
         if(confirm){
 
-          const updated = await phoneService.update(result.id, newContact);
+          try {
 
-          setPersons(persons.map(person => person.id != updated.id ? person : updated)); 
+            const updated = await phoneService.update(result.id, newContact);
+
+            setPersons(persons.map(person => person.id != updated.id ? person : updated));
+
+            setMessageSuccess(`${updated.name} was modify`)
+
+            setTimeout(() => {
+              setMessageSuccess(null)
+            }, 5000)
+            
+          } catch (error) {
+
+            setMessageSuccess(`Information of ${newContact.name} has already been removed from server`)
+            setTimeout(() => {
+              setMessageSuccess(null)
+            }, 5000)
+             
+            
+          }
+
+         
+            
+            
+         
+          
 
         }
       }
@@ -137,6 +170,8 @@ useEffect(() => {
       <Filter filterContacts={filterContacts} />
 
       <Form newContact={newContact} addContact={addContact} updateInputs={updateInputs}/>
+
+      <Notification message={message} />
 
       <Numbers persons={persons} del={deleteContact}/>
 

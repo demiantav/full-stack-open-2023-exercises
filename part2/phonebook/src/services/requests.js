@@ -49,7 +49,7 @@ const update = async (id,object) => {
         
     } catch (error) {
 
-        console.log(error);
+        console.log(error)
         
     }
 
