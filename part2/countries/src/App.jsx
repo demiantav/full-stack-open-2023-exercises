@@ -14,6 +14,8 @@ import Result from './components/Result.jsx'
         [filter,setFilter] = useState(""),
         [filtered, setFiltered] = useState([]);
 
+        console.log(filter);
+
 const result = async () => {
 
   try {
@@ -48,6 +50,18 @@ const handleChange = (e) => {
 
 }
 
+const test = () => {
+
+  if (filter === "") {
+    setFiltered([]);
+  } else {
+    const res = nameCountries.filter(element => element.name.common.toLowerCase().includes(filter.toLowerCase()))
+    setFiltered(res);
+  }
+
+
+}
+
 
 
 
@@ -55,11 +69,17 @@ useEffect(() => {
   result(); 
 }, []);
 
+useEffect(() => {
+  test()
+}, [filter]);
+
+
+
 
 return (
     <>
-      <Filter onChange={handleChange}/>
-      <Result filtered={filtered} />
+      <Filter onChange={handleChange} value={filter}/>
+      <Result filtered={filtered} setFilter={setFilter}/>
       
     </>
   )
