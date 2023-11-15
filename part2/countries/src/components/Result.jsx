@@ -1,14 +1,11 @@
-import { useEffect } from "react"
+import { useEffect, useState } from "react"
+import Weather from "./Weather";
 
 const Result = ({filtered, setFilter}) => {
 
+ 
+
     console.log(filtered)
-
-    // const showView = (country) => {
-
-    //     filtered = country
-    //     console.log(filtered)
-    // }
 
     if(filtered.length === 0) {
 
@@ -37,8 +34,14 @@ const Result = ({filtered, setFilter}) => {
                 )
             } else {
 
+                
+                
+
                 const lang = Object.values(filtered[0].languages)
-                console.log(lang)
+
+               
+
+                
 
                 return (
                     <>
@@ -58,8 +61,10 @@ const Result = ({filtered, setFilter}) => {
                             </ul>
 
                             <div>
-                                <img  style={{ maxHeight: 100 }} src={filtered[0].flags.svg} alt="flag" />
+                                <img style={{ maxHeight: 100 }} src={filtered[0].flags.svg} alt="flag" />
                             </div>
+
+                            <Weather countryName={filtered[0].name.common}/>
 
                         </div>
 

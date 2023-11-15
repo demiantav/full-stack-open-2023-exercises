@@ -10,6 +10,7 @@ import Result from './components/Result.jsx'
 
   console.log("reenderizado")
 
+
   const [nameCountries, setNameCountries] = useState([]),
         [filter,setFilter] = useState(""),
         [filtered, setFiltered] = useState([]);
@@ -22,10 +23,6 @@ const result = async () => {
 
     const res = await getCountries();
     setNameCountries(res)
-    
-    
-
-   
     
   } catch (error) {
 
@@ -50,7 +47,7 @@ const handleChange = (e) => {
 
 }
 
-const test = () => {
+const showButton = () => {
 
   if (filter === "") {
     setFiltered([]);
@@ -70,16 +67,20 @@ useEffect(() => {
 }, []);
 
 useEffect(() => {
-  test()
+  showButton()
 }, [filter]);
 
 
 
 
 return (
+  
     <>
+    <div className="main-container">
       <Filter onChange={handleChange} value={filter}/>
       <Result filtered={filtered} setFilter={setFilter}/>
+    </div>
+      
       
     </>
   )
