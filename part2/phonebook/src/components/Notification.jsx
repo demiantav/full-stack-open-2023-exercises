@@ -1,5 +1,6 @@
 const Notification = ({ message }) => {
-
+    
+    const conditions= ["Added","modify"]
 
     const styles = {
 
@@ -26,28 +27,33 @@ const Notification = ({ message }) => {
 
     if (message === null) {
       return null
-    }
+    } else{
 
-    if (message.includes(`removed`)) {
+      const test= conditions.some(el => message.includes(el))
+
+      if (test) {
         
         return (
-
-            <div style={styles.error} className="error">
-             {message}
+          <div style={styles.success} className="success">
+              {message}
             </div>
         )
 
       } else {
 
         return (
-            <div style={styles.success} className="success">
-              {message}
-            </div>
-          )
+          <div style={styles.error} className="error">
+          {message}
+          </div>
+            
+        )
 
 
       }
-  
+    }
+
+    
+      
     
   }
 

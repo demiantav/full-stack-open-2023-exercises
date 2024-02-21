@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const URL = `http://localhost:3001/persons`;
+const URL = `api/persons`;
 
 const get = async () => {
 
@@ -42,16 +42,11 @@ const supr = async (id) => {
 
 const update = async (id,object) => {
 
-    try {
+    
 
         const res = await axios.put(`${URL}/${id}`,object);
         return res.data;
-        
-    } catch (error) {
 
-        console.log(error)
-        
-    }
 
     
 

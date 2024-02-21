@@ -25,9 +25,9 @@ const Result = ({filtered, setFilter}) => {
               
                 return (
                     <>
-                    <div>
-                     <ul>
-                        {filtered.map((element => <li key={element.name.common}>{element.name.common} <button onClick={()=> setFilter(element.name.common)}>Show</button></li>))}
+                    <div >
+                     <ul className="container-ul">
+                        {filtered.map((element => <li key={element.name.common}>{element.name.common} <button className="btn-show" onClick={()=> setFilter(element.name.common)}>Show</button></li>))}
                       </ul>
                     </div>
                     </>

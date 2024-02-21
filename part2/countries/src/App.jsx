@@ -77,8 +77,14 @@ return (
   
     <>
     <div className="main-container">
+      <h1>Countries Information</h1>
+      <div className='wraper'>
+
       <Filter onChange={handleChange} value={filter}/>
       <Result filtered={filtered} setFilter={setFilter}/>
+
+      </div>
+      
     </div>
       
       

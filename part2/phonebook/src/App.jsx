@@ -73,16 +73,26 @@ useEffect(() => {
     const result = persons.find(item => item.name.toLowerCase() === newContact.name.toLowerCase());
 
     if(result===undefined){
-      
-      const per = await phoneService.post(newContact);
 
-      setPersons(persons.concat(per));
+      try {
+       const per = await phoneService.post(newContact);
+       const contactAdded= persons.concat(per);
 
-      setMessageSuccess(` Added ${newContact.name}`)
+       setPersons(contactAdded);
 
-      setTimeout(() => {
+       setMessageSuccess(`Added ${newContact.name}`)
+
+       setTimeout(() => {
         setMessageSuccess(null)
-      }, 5000)
+       }, 5000)
+        
+      } catch (error) {
+
+        setMessageSuccess(error.response.data.error)
+        
+      }
+      
+      
     
     } else {
         
@@ -94,7 +104,7 @@ useEffect(() => {
 
             const updated = await phoneService.update(result.id, newContact);
 
-            setPersons(persons.map(person => person.id != updated.id ? person : updated));
+            setPersons(persons.map(person => person.id === updated.id ? updated : person));
 
             setMessageSuccess(`${updated.name} was modify`)
 
@@ -104,7 +114,7 @@ useEffect(() => {
             
           } catch (error) {
 
-            setMessageSuccess(`Information of ${newContact.name} has already been removed from server`)
+            setMessageSuccess(error.response.data.error)
             setTimeout(() => {
               setMessageSuccess(null)
             }, 5000)

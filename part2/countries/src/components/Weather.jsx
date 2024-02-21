@@ -10,6 +10,8 @@ const Weather = ({countryName}) => {
 
         const res = getWeatherCountry(countryName);
 
+        console.log(res)
+
         res.then(data =>{
 
             setInfo(data)
